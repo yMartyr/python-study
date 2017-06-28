@@ -630,6 +630,10 @@ python manage.py migrate [appname] #根据app中migrations文件夹下的记录�
 所以当我们在命令行执行上面这两条命令时，django自带app也会生成相应的数据库表。
 其中生成的表命名是：appname\_classname。如：app01\_class。
 
+### 7 使用默认的sqlite数据库
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 要使用默认的sqlite数据库，就不需要修改setting.py里的DATABASES属性和\_\_init\_\_。
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 如果是第一次使用sqlite，点击pycharm右侧的Database，可以看到一个扳手图标“data source properties”，安装sqlite的插件。再将sqlite3数据库从django项目拖入Database即可。
+
 ## 3 Django ORM 操作数据表
 编写app下的model.py文件：
 ### 1 创建数据表
@@ -1524,10 +1528,3 @@ django自带分页
 
 
 
-
-models.ManyToManyField()  随便写在哪个类都行
-
-m=models.ManyToMany()
-
-manytomany 帮我们只能生成三列字段。
-manytomany给我们创建的第三张表，models没有对应类，所以我们无法直接对第三张表进行操作。
