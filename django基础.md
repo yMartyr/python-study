@@ -1427,11 +1427,11 @@ django中的orm，在models中创建类，添加上外键
 all() , filter()  返回的是一个queryset，里面包含的是表对像
 ```python
 #正向关联
-user_list = models.UserInfo.objects.all()                # 返回的<QuerySet [<UserInfo: UserInfo object>, <UserInfo: UserInfo object>, <UserInfo: UserInfo object>]>
+user_list = models.UserInfo.objects.all()                #访问数据库，并返回的<QuerySet [<UserInfo: UserInfo object>, <UserInfo: UserInfo object>, <UserInfo: UserInfo object>]>
     #print (user_list)
     for user in user_list:
         #print(user.ut)                         #UserType object
-        print(user.uid,user.username,user.ut.title)
+        print(user.uid,user.username,user.ut.title)   #通过ut这样来连表，每循环一次，就访问一次数据库。
 
 #反向关联
     user_type=models.UserType.objects.all()
