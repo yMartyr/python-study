@@ -66,6 +66,8 @@ MIDDLEWARE = [
 def csrf1(request):
     if request.method=="GET":
         return render(request,'csrf1.html')
+    else:
+        return HttpResponse('ok')
 ```
 ![django_csrf_forbidden][1]
 
@@ -86,16 +88,92 @@ def csrf1(request):
  ```html
  <input type="hidden" name="csrfmiddlewaretoken" value="mO6TC0UmyBaENlIpnffDq1N6qQtJaohNOyljD93vuulL3VyxXCCQaLNOKbAST3mq">
  ```
+ 注意：**除了在`{{ csrf_token }}`处生成随机字符串，还会在cookie中写入csrf，且cookie中的字符串和`{{ csrf_token }}`中的不一样**。
+ 
  
  **自己网站的随机字符串只能自己用**
  
+ 当浏览器第一次发送get请求给服务器时，服务器会给浏览器一个随机字符串。每次浏览器访问服务器都会携带随机字符串。且每次访问，服务器都会给浏览器一个随机字符串。
  
  
+ 总结：
+ 1. 开启csrf。在setting.py中的MIDDLEWARE修改csrf设置。（django默认是开启csrf的）
+ 2. 在form表单中添加`{% csrf_token %}`
  
+## 4 csrf的开启与关闭
+### 1 全局禁用
+在setting.py中的MIDDLEWARE设置的是全局csrf，要全局禁用也是在这里设置。
+```python
+MIDDLEWARE = [
+    # 'django.middleware.csrf.CsrfViewMiddleware',
+]
+```
+
+### 2 局部禁用
+需要先开启全局
+```python
+#在setting.py中的MIDDLEWARE
+'django.middleware.csrf.CsrfViewMiddleware'， #打开此项
+
+#在views中的函数：
+from django.views.decorators.csrf import csrf_exempt
+
+@csrf_exempt
+def csrf1(request):
+    if request.method=="GET":
+        return render(request,'csrf1.html')
+    else:
+        return render (request, 'csrf1.html')
+```
+
+### 3 局部使用
+需要先关闭全局
+```python
+#在setting.py中的MIDDLEWARE
+#'django.middleware.csrf.CsrfViewMiddleware'， #注释此项
+
+#在views中的函数：
+from django.views.decorators.csrf import csrf_protect
+
+@csrf_protect
+def csrf1(request):
+    if request.method=="GET":
+        return render(request,'csrf1.html')
+    else:
+        return render (request, 'csrf1.html')
+```
 
 
+## 5 CBV上添加装饰器
+在django中，做了限制。不能直接给类里面的函数添加
+```python
+def wrapper(func):     #自定义装饰器
+	def inner(*args,**kwargs):
+		return func(*args,**kwargs)
+	return inner
+	
+# 1. 指定方法上添加装饰器
+from django.Views import View
+ class Foo(View):
 
+     @method_decorator(wrapper)
+     def get(self,request):
+         pass
 
+     def post(self,request):
+         pass
+
+# 2. 在类上添加
+@method_decorator(wrapper,name='dispatch')
+class Foo(View):
+
+   def get(self,request):
+	   pass
+
+   def post(self,request):
+	   pass				
+
+```
 
 
 
