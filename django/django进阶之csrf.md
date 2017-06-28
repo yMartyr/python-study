@@ -177,12 +177,12 @@ class Foo(View):
 ```
 给dispatch加装饰器，会给class(View)所有的函数都加上装饰器。因为会优先执行dispatch()
 
-### 6 Ajax提交数据时，携带CSRF
+## 6 Ajax提交数据时，携带CSRF
 ```python
 a. 放置在data中携带
 			
 <form method="POST" action="/csrf1.html">
-	{% csrf_token %}
+	{% csrf_token %}    #此处对应的input标签的name=csrfmiddlewaretoken
 	<input id="user" type="text" name="user" />
 	<input type="submit" value="提交"/>
 	<a onclick="submitForm();">Ajax提交</a>
@@ -190,12 +190,12 @@ a. 放置在data中携带
 <script src="/static/jquery-1.12.4.js"></script>
 <script>
 	function submitForm(){
-		var csrf = $('input[name="csrfmiddlewaretoken"]').val();
+		var csrf = $('input[name="csrfmiddlewaretoken"]').val();   
 		var user = $('#user').val();
 		$.ajax({
 			url: '/csrf1.html',
 			type: 'POST',
-			data: { "user":user,'csrfmiddlewaretoken': csrf},
+			data: { "user":user,'csrfmiddlewaretoken': csrf},    #django中在Ajax的data中，这里必须这么写，django后台才能接受到csrf的值
 			success:function(arg){
 				console.log(arg);
 			}
@@ -232,10 +232,7 @@ b. 放在请求头中
 </script>
 ```
 
-
-
-
-一般在表单提交POST才会加上这样一个随即字符串
+## 7 其他方式验证
 
 
 手机短信验证，验证码
