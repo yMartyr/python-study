@@ -154,9 +154,11 @@ def wrapper(func):     #自定义装饰器
 	
 # 1. 指定方法上添加装饰器
 from django.Views import View
- class Foo(View):
+from django.utils.decorators import method_decorator
 
-     @method_decorator(wrapper)
+class Foo(View):
+
+     @method_decorator(wrapper)    #djang中如果要给类里的函数添加自定义的装饰器，只能通过method_decorator(自定义装饰器)
      def get(self,request):
          pass
 
@@ -172,7 +174,62 @@ class Foo(View):
 
    def post(self,request):
 	   pass				
+```
+给dispatch加装饰器，会给class(View)所有的函数都加上装饰器。因为会优先执行dispatch()
 
+### 6 Ajax提交数据时，携带CSRF
+```python
+a. 放置在data中携带
+			
+<form method="POST" action="/csrf1.html">
+	{% csrf_token %}
+	<input id="user" type="text" name="user" />
+	<input type="submit" value="提交"/>
+	<a onclick="submitForm();">Ajax提交</a>
+</form>
+<script src="/static/jquery-1.12.4.js"></script>
+<script>
+	function submitForm(){
+		var csrf = $('input[name="csrfmiddlewaretoken"]').val();
+		var user = $('#user').val();
+		$.ajax({
+			url: '/csrf1.html',
+			type: 'POST',
+			data: { "user":user,'csrfmiddlewaretoken': csrf},
+			success:function(arg){
+				console.log(arg);
+			}
+		})
+	}
+
+</script>
+				
+b. 放在请求头中
+			
+<form method="POST" action="/csrf1.html">
+	{% csrf_token %}
+	<input id="user" type="text" name="user" />
+	<input type="submit" value="提交"/>
+	<a onclick="submitForm();">Ajax提交</a>
+</form>
+<script src="/static/jquery-1.12.4.js"></script>
+<script src="/static/jquery.cookie.js"></script>
+
+<script>
+	function submitForm(){
+		var token = $.cookie('csrftoken');
+		var user = $('#user').val();
+		$.ajax({
+			url: '/csrf1.html',
+			type: 'POST',
+			headers:{'X-CSRFToken': token},
+			data: { "user":user},
+			success:function(arg){
+				console.log(arg);
+			}
+		})
+	}
+</script>
 ```
 
 
