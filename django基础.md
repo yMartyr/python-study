@@ -1523,6 +1523,7 @@ def xss(request):
     return render(request,'abc.html',{'abc':abc})
 
 ```
+当
 	
 1. cookie
 2. 弹窗
@@ -1539,6 +1540,14 @@ django自带防xss工具
 CSRF(也有叫XSRF）跨站请求伪造
 把一部分人拒之门外
 用户先发get请求，服务器给页面写入随机字符串。当浏览器访问服务器时，会携带随即字符串来访问。
+
+
+一般在表单提交都会加上这样一个随即字符串
+```html
+<form>
+{% csrf_token %}
+</form>
+```
 
 
 模板引擎
