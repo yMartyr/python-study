@@ -71,6 +71,21 @@ def csrf1(request):
 
 可以看出，**csrf防御是发生在进入路由系统之前**，由于我们没有携带随机字符串，所以被阻止了。
 
+ 我们在form表单加入一行代码：
+ ```html
+ <form method="post" action="/app01/csrf1/">
+    {% csrf_token %}    
+	{{ csrf_token }}    <!-- 此时是以字符串显示在网页中的 -->
+    用户：<input type="text"  name="user" >
+    转账数：<input type="text" name="money" >
+    <input type="submit" >
+</form>
+ ```
+ 此时通过审查元素可以看到：
+  `{% csrf_token %}`  在网页中对应的内容是：
+ ```html
+ <input type="hidden" name="csrfmiddlewaretoken" value="mO6TC0UmyBaENlIpnffDq1N6qQtJaohNOyljD93vuulL3VyxXCCQaLNOKbAST3mq">
+ ```
  
 
 
