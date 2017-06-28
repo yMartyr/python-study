@@ -181,7 +181,7 @@ class Foo(View):
 ```python
 a. 放置在data中携带
 			
-<form method="POST" action="/csrf1.html">
+<form method="POST" action="/csrf1/">
 	{% csrf_token %}    #此处对应的input标签的name=csrfmiddlewaretoken
 	<input id="user" type="text" name="user" />
 	<input type="submit" value="提交"/>
