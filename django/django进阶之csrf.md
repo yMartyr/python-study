@@ -187,7 +187,7 @@ a. 放置在data中携带
 	<input type="submit" value="提交"/>
 	<a onclick="submitForm();">Ajax提交</a>
 </form>
-<script src="/static/jquery-1.12.4.js"></script>
+<script src="/static/jquery-3.2.1.js"></script>
 <script>
 	function submitForm(){
 		var csrf = $('input[name="csrfmiddlewaretoken"]').val();   
@@ -212,7 +212,7 @@ b. 放在请求头中
 	<input type="submit" value="提交"/>
 	<a onclick="submitForm();">Ajax提交</a>
 </form>
-<script src="/static/jquery-1.12.4.js"></script>
+<script src="/static/jquery-3.2.1.js"></script>
 <script src="/static/jquery.cookie.js"></script>
 
 <script>
