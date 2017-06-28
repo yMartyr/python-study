@@ -193,7 +193,7 @@ a. 放置在data中携带
 		var csrf = $('input[name="csrfmiddlewaretoken"]').val();   
 		var user = $('#user').val();
 		$.ajax({
-			url: '/csrf1.html',
+			url: '/csrf1/',
 			type: 'POST',
 			data: { "user":user,'csrfmiddlewaretoken': csrf},    #django中在Ajax的data中，这里必须这么写，django后台才能接受到csrf的值
 			success:function(arg){
@@ -206,21 +206,21 @@ a. 放置在data中携带
 				
 b. 放在请求头中
 			
-<form method="POST" action="/csrf1.html">
+<form method="POST" action="/csrf1/">
 	{% csrf_token %}
 	<input id="user" type="text" name="user" />
 	<input type="submit" value="提交"/>
 	<a onclick="submitForm();">Ajax提交</a>
 </form>
 <script src="/static/jquery-3.2.1.js"></script>
-<script src="/static/jquery.cookie.js"></script>
+<script src="/static/jquery.cookie.js"></script>  #jquery官方的cookie操作插件
 
 <script>
 	function submitForm(){
 		var token = $.cookie('csrftoken');
 		var user = $('#user').val();
 		$.ajax({
-			url: '/csrf1.html',
+			url: '/csrf1/',
 			type: 'POST',
 			headers:{'X-CSRFToken': token},
 			data: { "user":user},
