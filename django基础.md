@@ -1218,7 +1218,15 @@ reverse(),只有前面是order by（）才有用
 映射中排除某些字段属性 （即sql语句中select后面跟着的字段名）
 ```python
 models.UserInfo.objects.defer('username','uid')    #除‘username’和'uid'之外的字段
+```
 
+### only
+映射中只包含only的参数，和values()有点像。但是only()返回的是queryset里面包含的是对象类型。
+```python
+result=models.UserInfo.objects.all().only('id','name')
+此时返回的是obj，只是它里面的元素要比\*要少。
+for i in result:
+    print(i.id,i.name,i.age)    #此时能取age，但是每次取age的值，都会去数据库里查询一次。
 ```
 
 ### 原生sql语句
@@ -1480,89 +1488,27 @@ PS：跨表关联时，是用left join连表的
 
 
 
-
-
-django orm
-
-分页
+# 练习
+## 分页
 django自带分页
 自定义分页组件
 
 文件上传
 
-.filter().all()
-
-orm的其他操作：
-models.UserInfo.objects.all().order_by('id')   #按id升序
-models.UserInfo.objects.all().order_by('-id')   #按id降序
-models.UserInfo.objects.all().order_by('-id','name')   #先按id降序，再按name升序
-
-
-v=models.UserInfo.objects.all().order_by('id')   #按id升序
-print(v.query)    #返回的sql语句
-
-from django.db.models import Count
-v=models.UserInfo.objects.values('ut_id').annotate(xxx=Count('id'))   #分组
-v=models.UserInfo.objects.values('ut_id').annotate(xxx=Count('id')).filter(xxx__gt=2)   #分组,后进行二次筛选。相当于having
 
 
 
 
 
 
-xss攻击（跨站脚本攻击）
-```python
-#abc.html中的代码
-{{ abc|safe }}  <!-- 不加|safe，是以字符串显示html标签 ，只有保证是安全的，浏览器才会渲染-->
-
-#views中的代码
-def abc():
-    return "<a href='#'>点我</a>"
-
-def xss(request):
-    return render(request,'abc.html',{'abc':abc})
-
-```
-当
-	
-1. cookie
-2. 弹窗
-
-django自带防xss工具
-
-
-自己手动过滤
 
 
 
 
 
-CSRF(也有叫XSRF）跨站请求伪造
-把一部分人拒之门外
-用户先发get请求，服务器给页面写入随机字符串。当浏览器访问服务器时，会携带随即字符串来访问。
-
-
-一般在表单提交都会加上这样一个随即字符串
-```html
-<form>
-{% csrf_token %}
-</form>
-```
-
-
-模板引擎
-
-- 部分方法
-
-- 自定义方法
 
 
 
-result=models.UserInfo.objects.all().only('id','name')
-
-此时返回的是obj，只是它里面的元素要比\*要少。
-for i in result:
-    print(i.id,i.name,i.age)    #此时能取age，但是每次取age的值，都会去数据库里查询一次。
 
 
 all().defer()   除什么之外的元素。但是不管除不除主键id，它都会取id 的
