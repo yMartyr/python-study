@@ -75,7 +75,7 @@ def csrf1(request):
  ```html
  <form method="post" action="/app01/csrf1/">
     {% csrf_token %}    
-	{{ csrf_token }}    <!-- 此时是以字符串显示在网页中的 -->
+{	{{ csrf_token }}    <!-- 此时是以字符串显示在网页中的 -->
     用户：<input type="text"  name="user" >
     转账数：<input type="text" name="money" >
     <input type="submit" >
@@ -86,6 +86,11 @@ def csrf1(request):
  ```html
  <input type="hidden" name="csrfmiddlewaretoken" value="mO6TC0UmyBaENlIpnffDq1N6qQtJaohNOyljD93vuulL3VyxXCCQaLNOKbAST3mq">
  ```
+ 
+ **自己网站的随机字符串只能自己用**
+ 
+ 
+ 
  
 
 
