@@ -233,17 +233,7 @@ b. 放在请求头中
 ```
 
 ## 7 其他方式验证
-
-
-手机短信验证，验证码
-```html
-<form>
-{% csrf_token %}
-</form>
-```
-
-
-ajax 
+即使使用了csrf来防攻击，但也不是万无一失的。如果我们的csrf_token被人获悉以后，别人就能进行csrf攻击了。此时还可以通过其他方式来保证我们的账户财产安全：手机短信验证，验证码
 
 
   [1]: http://orzm1jlhd.bkt.clouddn.com///170628/django_csrf_forbidden.png
