@@ -1,4 +1,12 @@
+---
+title:django基础 
+tags: 
 
+---
+
+[toc]
+
+---
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; python中的Python的WEB框架有Django、Tornado、Flask 等多种，Django相较与其他WEB框架其优势为：大而全，框架本身集成了ORM、模型绑定、模板引擎、缓存、Session等诸多功能。
 ```
@@ -824,7 +832,7 @@ user_group = models.ForeignKey("UserGroup",to_field='gid',null=True)
 
 
 ## 4 Django ORM操作数据行
-### 增
+### 1 增
 
 ```python
 def orm(request):
@@ -848,7 +856,7 @@ def orm(request):
 每执行一次上述代码，就会在数据库中写入一次，不要反复执行上述代码。
 
 
-### 查
+### 2 查
 #### 1 全表查询
 > models.UserInfo.objects.all()  #返回一个QuerySet列表，数据表中的每一行数据在QuerySet列表中都是一个字典。all()是返回UserInfo表中的所有数据。
 ```python
