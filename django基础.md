@@ -1229,6 +1229,12 @@ for i in result:
     print(i.id,i.name,i.age)    #此时能取age，但是每次取age的值，都会去数据库里查询一次。
 ```
 
+### using
+```python
+models.UserInfo.objects.all().using('数据库')
+去指定数据库拿数据，不写，就是默认的
+```
+
 ### 原生sql语句
 
 可以写原生sql语句：
@@ -1446,7 +1452,7 @@ UserInfo和UserType通过外键相关联。此时包含外链的表，直接可�
 获取包含外键的表中对应的一行数据对象。
 
 2.obj
-first()  返回的是一个obj对像
+first()  返回的是一个obj对象
 
 3. values
 返回的是queryset，包含的是字典
@@ -1511,11 +1517,9 @@ django自带分页
 
 
 
-all().defer()   除什么之外的元素。但是不管除不除主键id，它都会取id 的
 
 
-models.UserInfo.objects.all().using('数据库')
-去指定数据库拿数据，不写，就是默认的
+
 
 
 
