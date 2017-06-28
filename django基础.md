@@ -1325,8 +1325,13 @@ rep.set_signed_cookie(key,value,salt='加密盐',...)
 由于cookie保存在客户端的电脑上，所以，JavaScript和jquery也可以操作cookie。
 return obj
 ```
-3. 通过jquery来操作cookie
+3. 通过js来操作cookie
 ```javascript
+方式一：
+document.cookie    //返回的当前页面的cookie，格式："xxx=xxxxxx;xxx=xxxxx;"
+
+方式二:
+<script src='/static/js/jquery-3.2.1.js'></script>
 <script src='/static/js/jquery.cookie.js'></script>
 $.cookie("list_pager_num", 30,{ path: '/' });
 ```
@@ -1492,6 +1497,8 @@ PS：跨表关联时，是用left join连表的
 
 
 # 模板
+母板
+模板标记
 
 
 
