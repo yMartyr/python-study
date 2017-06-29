@@ -5,9 +5,6 @@ tags:
 
 ---
 
-[TOC]
-
----
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; python中的Python的WEB框架有Django、Tornado、Flask 等多种，Django相较与其他WEB框架其优势为：大而全，框架本身集成了ORM、模型绑定、模板引擎、缓存、Session等诸多功能。
 
@@ -1293,7 +1290,7 @@ http://www.cnblogs.com/wupeiqi/articles/6216618.html
 
 
 # 4 Cookie
-cookie就是保存在浏览器中的键值对。
+cookie就是保存在浏览器中的键值对。但对于敏感信息，服务器是不放在cookie中的，防止被修改。
 当浏览器第一次向服务器发起请求时，服务器给浏览器发送响应时，会将cookie随响应一起发给浏览器。之后，浏览器每次发起请求都会携带cookie来访问服务器。
 
 1. 获取Cookie：
