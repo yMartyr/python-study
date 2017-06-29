@@ -30,7 +30,7 @@ for (int i=0;i<=999;i++){
 
 ## 4 防xss攻击
 
-1. django框架，自带防xss攻击
+1. safe
 ```python
 #abc.html中的代码
 {{ abc|safe }}  <!-- 不加|safe，是以字符串显示html标签 ，只有保证是安全的，浏览器才会渲染-->
@@ -43,7 +43,9 @@ def xss(request):
     return render(request,'abc.html',{'abc':abc})
 
 ```
-2. 过滤特殊字符
+2. mark_safe
+
+3. 过滤特殊字符
 将用户所提供的内容进行过滤，如script等
 
 
