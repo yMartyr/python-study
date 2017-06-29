@@ -1332,7 +1332,15 @@ document.cookie    //返回的当前页面的cookie，格式："xxx=xxxxxx;xxx=x
 方式二:
 <script src='/static/js/jquery-3.2.1.js'></script>
 <script src='/static/js/jquery.cookie.js'></script>
+$.cookie('username')
 $.cookie("list_pager_num", 30,{ path: '/' });
+```
+4. 删除cookie中的某些值
+服务器并不能删除浏览器缓存的cookie。但是在发送cookie给浏览器之前，可以删除某些值。
+```python
+reponse=HttpResponse('...')
+response.delete_cookie('age')
+return response
 ```
 
 
