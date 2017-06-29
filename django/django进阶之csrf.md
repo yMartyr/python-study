@@ -180,7 +180,7 @@ class Foo(View):
 ## 6 Ajax提交数据时，携带CSRF
 ```python
 a. 放置在data中携带
-			
+#放在请求体中
 <form method="POST" action="/csrf1/">
 	{% csrf_token %}    #此处对应的input标签的name=csrfmiddlewaretoken
 	<input id="user" type="text" name="user" />
@@ -205,7 +205,7 @@ a. 放置在data中携带
 </script>
 				
 b. 放在请求头中
-			
+# 在cookie中获取，放在请求头
 <form method="POST" action="/csrf1/">
 	{% csrf_token %}
 	<input id="user" type="text" name="user" />
