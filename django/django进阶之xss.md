@@ -44,7 +44,8 @@ def xss(request):
 
 ```
 2. mark_safe
-
+```python
+```
 3. 过滤特殊字符
 将用户所提供的内容进行过滤，如script等
 
