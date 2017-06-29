@@ -1500,7 +1500,11 @@ PS：跨表关联时，是用left join连表的
 
 
 
+5. select_related 
 
+
+
+6. prefetch_related 
 
 
 # 模板
