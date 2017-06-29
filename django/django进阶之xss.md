@@ -45,6 +45,10 @@ def xss(request):
 ```
 2. mark_safe
 ```python
+from django.utils.safestring import mark_safe 
+def abc(self): 
+
+       return mark_safe(”<a href=’/accounts/%s/’>%s</a>” %(self.user.id, self.user.username)) 
 ```
 3. 过滤特殊字符
 将用户所提供的内容进行过滤，如script等
