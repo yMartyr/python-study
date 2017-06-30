@@ -222,7 +222,7 @@ b. 放在请求头中
 		$.ajax({
 			url: '/csrf1/',
 			type: 'POST',
-			headers:{'X-CSRFToken': token},
+			headers:{'X-CSRFToken': token},      #请求头
 			data: { "user":user},
 			success:function(arg){
 				console.log(arg);
