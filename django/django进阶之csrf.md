@@ -47,7 +47,7 @@ CSRF能够做的事情包括：以你名义发送邮件，发消息，盗取你�
 
 ### 携带随机字符串
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;为了防止上面的post方式下csrf攻击，银行规定，要访问服务器，不仅要post数据，还要服务器给发给浏览器的一个随机字符串。
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;用户先发get请求，服务器给页面写入随机字符串。当浏览器访问服务器时，会携带随机字符串来访问。这样就能阻止一部分人的csrf攻击。这种给浏览器生成随机字符串的方式就叫csrf。
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;用户先发get请求，服务器给页面写入随机字符串。当浏览器访问服务器时，会携带**随机隐藏的字符串**来访问。这样就能阻止一部分人的csrf攻击。这种给浏览器生成随机字符串的方式就叫csrf。
 ```html
 <form method="post" action="/app01/csrf1/">
     用户：<input type="text"  name="user" >
@@ -195,7 +195,7 @@ a. 放置在data中携带
 		$.ajax({
 			url: '/csrf1/',
 			type: 'POST',
-			data: { "user":user,'csrfmiddlewaretoken': csrf},    #django中在Ajax的data中，这里必须这么写，django后台才能接受到csrf的值
+			data: { "user":user,'csrfmiddlewaretoken': csrf},    #django中在Ajax的data中，这里必须这么写，django后台才能接受到csrf的值。如果此处写了以后，上面form表单那就不用写csrf_token。
 			success:function(arg){
 				console.log(arg);
 			}
